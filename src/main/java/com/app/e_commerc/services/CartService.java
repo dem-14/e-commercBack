@@ -25,8 +25,14 @@ public class CartService {
 	 */
 	public Cart createCart() {
 		Cart cart = new Cart();
-		carts.put(cart.getId(), cart);
-		return cart;
+		if (cart != null && cart.getId() != null) {
+			carts.put(cart.getId(), cart);
+			return cart;
+		}
+		StringBuilder sb = new StringBuilder("El carrito con id: ");
+		sb.append(cart.getId());
+		sb.append(" no existe");
+		throw new ObjectNotExistException(sb.toString());
 	}
 
 	/*
